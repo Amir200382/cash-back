@@ -20,3 +20,15 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import TransactionViewSet, SavingPlanViewSet, BudgetViewSet
+
+router = DefaultRouter()
+router.register(r'transactions', TransactionViewSet, basename='transaction')
+router.register(r'saving_plans', SavingPlanViewSet, basename='saving_plan')
+router.register(r'budgets', BudgetViewSet, basename='budget')
+
+urlpatterns = [
+    path('', include(router.urls)),
+]
